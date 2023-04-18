@@ -1,6 +1,7 @@
 import { CanceledError } from 'axios';
 import React, { useEffect, useState } from 'react'
 import apiClient from '../services/api-client';
+import useData from './useData';
 
 
 export interface Platform {
@@ -18,36 +19,37 @@ export interface Game {
 }
 
 
-interface FetchGamesResponse {
-    count: number;
-    results: Game[]
+// interface FetchGamesResponse {
+//     count: number;
+//     results: Game[]
 
-}
+// }
 
-export const useGames = () => {
+// export const useGames = () => {
 
-    const [games, setGames] = useState<Game[]>([]);
-    const [errors, setErrors] = useState('')
-    const [isLoading, setLoading] = useState(false)
+//     const [games, setGames] = useState<Game[]>([]);
+//     const [errors, setErrors] = useState('')
+//     const [isLoading, setLoading] = useState(false)
 
-    useEffect(() => {
-        const controller = new AbortController()
-        setLoading(true)
-        apiClient.get<FetchGamesResponse>('/games', { signal: controller.signal })
-            .then(res => {
-                setGames(res.data.results)
-                setLoading(false)
-                console.log(games)
-            })
-            .catch((err) => {
-                if (err instanceof CanceledError) return;
-                setErrors(err.message)
-                setLoading(false)
-            })
+//     useEffect(() => {
+//         const controller = new AbortController()
+//         setLoading(true)
+//         apiClient.get<FetchGamesResponse>('/games', { signal: controller.signal })
+//             .then(res => {
+//                 setGames(res.data.results)
+//                 setLoading(false)
+//                 console.log(games)
+//             })
+//             .catch((err) => {
+//                 if (err instanceof CanceledError) return;
+//                 setErrors(err.message)
+//                 setLoading(false)
+//             })
 
-        return () => controller.abort();
+//         return () => controller.abort();
 
 
-    }, [])
-    return { games, errors, isLoading };
-}
+//     }, [])
+//     return { games, errors, isLoading };
+// }
+export const useGames = () => useData<Game>('/games')
