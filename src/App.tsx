@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Button, ButtonGroup, Grid, GridItem, Show } from '@chakra-ui/react'
 import { NavBar } from './components/NavBar/NavBar'
-import { GameGrid } from './components/GameGrid'
+import { GameGrid } from './components/CardBox/GameGrid'
 
 function App() {
   const [count, setCount] = useState(0)
