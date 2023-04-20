@@ -33,5 +33,6 @@ export const PlatformIconList = ({ platform }: Props) => {
             ))
             }
         </HStack >
+
     )
 }
