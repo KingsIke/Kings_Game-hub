@@ -1,5 +1,6 @@
 import { CanceledError } from 'axios';
 import React, { useEffect, useState } from 'react'
+import { GameQuery } from '../App';
 import apiClient from '../services/api-client';
 import useData from './useData';
 import { Genre } from './useGenres';
@@ -53,4 +54,4 @@ export interface Game {
 //     }, [])
 //     return { games, errors, isLoading };
 // }
-export const useGames = (selectedGenre: Genre | null, selectedPlatform: Platform | null) => useData<Game>('/games', { params: { genres: selectedGenre?.id, Platforms: selectedPlatform?.id } }, [selectedGenre?.id, selectedPlatform?.id])
+export const useGames = (gameQuery: GameQuery) => useData<Game>('/games', { params: { genres: gameQuery.genre?.id, platforms: gameQuery.platform?.id } }, [gameQuery])
